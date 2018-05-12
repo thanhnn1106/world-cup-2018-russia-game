@@ -15,8 +15,8 @@ return [
     ),
     'user_status' => array(
         'label' => array(
-            1 => 'Đang hoạt động',
-            0 => 'Đang khoá',
+            1 => 'Active',
+            0 => 'Inactive',
         ),
         'value' => array(
             'active'   => 1,

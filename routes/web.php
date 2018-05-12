@@ -85,6 +85,18 @@ Route::group([
             'as'   => 'users',
             'uses' => 'UsersController@index',
         ]);
+        $router->match(['get', 'post'], 'users/add', [
+            'as'   => 'users.add',
+            'uses' => 'UsersController@add',
+        ]);
+        $router->match(['get', 'post'], 'users/edit/{userId}', [
+            'as'   => 'users.edit',
+            'uses' => 'UsersController@edit',
+        ]);
+        $router->match(['get', 'post'], 'users/delete/{userId}', [
+            'as'   => 'users.delete',
+            'uses' => 'UsersController@delete',
+        ]);
     });
 });
 
