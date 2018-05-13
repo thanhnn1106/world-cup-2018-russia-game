@@ -12,11 +12,14 @@ class MatchController extends Controller
 {
     public function index(Request $request)
     {
-        $paramSearch['filter_id_show'] = $request->get('filter_id_show');
+        $paramSearch['filter_is_show'] = $request->get('filter_is_show');
+        $paramSearch['filter_status']  = $request->get('filter_status');
         $data = array(
             'matches'        => Matches::getList($paramSearch),
-            'filter_id_show' => $paramSearch['filter_id_show'],
-            'status'         => config('site.match_status.label')
+            'is_show'        => config('site.match_show.label'),
+            'filter_is_show' => $paramSearch['filter_is_show'],
+            'status'         => config('site.match_status.label'),
+            'filter_status'  => $paramSearch['filter_status']
         );
 
         return view('admin.matches.list', $data);

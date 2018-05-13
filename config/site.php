@@ -23,12 +23,22 @@ return [
             'inactive' => 0
         ),
     ),
+    'match_show' => array(
+        'label' => array(
+            1 => 'Active',
+            0 => 'Inactive',
+        ),
+        'value' => array(
+            'active'   => 1,
+            'inactive' => 0
+        ),
+    ),
     'match_status' => array(
         'label' => array(
-            0 => 'Sắp diễn ra',
-            1 => 'Đang diễn ra',
-            2 => 'Kết thúc',
-            3 => 'Đã trả kết quả'
+            0 => 'Start soon',
+            1 => 'Playing',
+            2 => 'Finished',
+            3 => 'Returned result'
         ),
         'value' => array(
             'coming'         => 0,

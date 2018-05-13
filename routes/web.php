@@ -14,41 +14,62 @@
 //Route::get('/', function () {
 //    return view('welcome');
 //});
-
-
-// FRONT ROUTER
+// AUTH ROUTER
 Route::group([
-    'as'           => 'front.',
+    'as'           => 'auth.',
     'middleware'   => 'web'
 ], function ($router) {
-
-    // Do not login
-    $router->get('/home', [
-        'as'   => 'home',
-        'uses' => 'Front\HomeController@index'
-    ]);
-    $router->get('/team', [
-        'as'   => 'team',
-        'uses' => 'Front\HomeController@team'
-    ]);
-    $router->get('/point-table', [
-        'as'   => 'point_table',
-        'uses' => 'Front\HomeController@pointTable'
-    ]);
-    $router->get('/fixture', [
-        'as'   => 'fixture',
-        'uses' => 'Front\HomeController@fixture'
-    ]);
-    $router->get('/group', [
-        'as'   => 'group',
-        'uses' => 'Front\HomeController@group'
-    ]);
-    $router->get('/result', [
-        'as'   => 'result',
-        'uses' => 'Front\HomeController@result'
-    ]);
+    $router->group([
+        'middleware' => ['web'],
+    ], function ($router) {
+        $router->post('auth/login', [
+            'as'   => 'login',
+            'uses' => 'Auth\LoginController@login'
+        ]);
+        $router->get('logout', [
+            'as'   => 'logout',
+            'uses' => 'Auth\LoginController@logout'
+        ]);
+    });
 });
 
+$router->group([
+    'namespace'  => 'Front',
+    'as'         => 'front.',
+    'middleware' => 'web',
+], function ($router) {
+    // Do not login
+    $router->get('/home', [
+        'as' => 'home',
+        'uses' => 'HomeController@index'
+    ]);
+    $router->get('/team', [
+        'as' => 'team',
+        'uses' => 'HomeController@team'
+    ]);
+    $router->get('/user-ranking', [
+        'as' => 'user_ranking',
+        'uses' => 'UserRankingController@index'
+    ]);
+    $router->get('/matches', [
+        'as' => 'matches',
+        'uses' => 'MatchesController@index'
+    ]);
+    $router->get('/group', [
+        'as' => 'group',
+        'uses' => 'HomeController@group'
+    ]);
+    $router->get('/result', [
+        'as' => 'result',
+        'uses' => 'HomeController@result'
+    ]);
+    // Require login
+    $router->group([
+        'middleware' => ['auth.front']
+    ], function($router) {
+        
+    });
+});
 
 // ADMIN ROUTER
 Route::group([
@@ -102,4 +123,4 @@ Route::group([
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'Front\HomeController@index')->name('home');

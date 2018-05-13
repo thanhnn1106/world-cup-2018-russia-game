@@ -1,39 +1,93 @@
 <?php
 
+
 namespace App\Http\Controllers\Auth;
 
+use App;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Mail\Mailer;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.
-     *
-     * @var string
+     * @var App|Application
      */
-    protected $redirectTo = '/home';
+    protected $app;
+    protected $mailer;
+
+    // Overwrite
+    protected $redirectAfterLogout = '/home';
+    protected $redirectPath        = '/home';
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * AuthController constructor.
+     * @param Application $app
+     * @param Mailer $mailer
      */
-    public function __construct()
+    public function __construct(Application $app, Mailer $mailer)
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:web', [
+            'except' => [
+                'logout',
+            ],
+        ]);
     }
+
+    /**
+     * Log the user out of the application.
+     * Overwrite
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return redirect()->route('front.home');
+    }
+
+    /**
+     * @return string
+     */
+    public function redirectPath()
+    {
+        return route('front.home');
+    }
+
+    /**
+     * Get the guard to be used during authentication.
+     * Overwrite
+     * 
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    protected function guard()
+    {
+        return Auth::guard('web');
+    }
+
+    /**
+     * Get the needed authorization credentials from the request.
+     * Overwrite
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return array
+     */
+    protected function credentials(Request $request)
+    {
+        $credentials           = $request->only('email', 'password', 'status');
+        $credentials['status'] = config('site.user_status.value.active');
+
+        return $credentials;
+    }
+
 }

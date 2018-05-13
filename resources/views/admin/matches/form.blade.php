@@ -57,7 +57,7 @@
                                 <label class="col-sm-2 form-control-label">{{ $matchInfo->away_team }} Score</label>
                                 <div class="col-sm-10">
                                     <input type="number" id="away_score" name="away_score" class="form-control"
-                                           value="{{ $matchInfo->away_Score }}">
+                                           value="{{ $matchInfo->away_score }}">
                                 </div>
                             </div>
                             <div class="form-group row">

@@ -25,10 +25,22 @@
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <select class="form-control" name="filter_id_show" onchange="this.form.submit();">
+                                            <select class="form-control" name="filter_status" onchange="this.form.submit();">
                                                 <option value="">All</option>
                                                 @foreach ($status as $key => $value)
-                                                <option @if ($filter_id_show != '' && (int)$key === (int)$filter_id_show) selected="selected" @endif value="{{ $key }}">{{ $value }}</option>
+                                                <option @if ($filter_status != '' && (int)$key === (int)$filter_status) selected="selected" @endif value="{{ $key }}">{{ $value }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <select class="form-control" name="filter_is_show" onchange="this.form.submit();">
+                                                <option value="">All</option>
+                                                @foreach ($is_show as $key => $value)
+                                                <option @if ($filter_is_show != '' && (int)$key === (int)$filter_is_show) selected="selected" @endif value="{{ $key }}">{{ $value }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -50,7 +62,7 @@
                                         <th>Home Team</th>
                                         <th>Away Team</th>
                                         <th>Status</th>
-                                        <th>Match Date</th>
+                                        <th>Show in front</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
@@ -68,13 +80,33 @@
                                         <td style="width: 10%;">{{ $match->home_team }}</td>
                                         <td style="width: 10%;">{{ $match->away_team }}</td>
                                         <td style="width: 10%;">
-                                            <div class="badge badge-success">
+                                            <?php
+                                                $matchColor = '';
+                                                if ($match->status == 3) {
+                                                    $matchColor = 'secondary';
+                                                } else if ($match->status == 2) {
+                                                    $matchColor = 'warning';
+                                                } else if ($match->status == 1) {
+                                                    $matchColor = 'success';
+                                                } else if ($match->status == 0) {
+                                                    $matchColor = 'info';
+                                                }
+                                            ?>
+                                            <div class="badge badge-{{ $matchColor }}">
                                                 {{ $status[$match->status] }}
                                             </div>
                                         </td>
                                         <td style="width: 10%;">
-                                            <div class="badge badge-success">
-                                                {{ $status[$match->status] }}
+                                            <?php
+                                                $isActiveColor = '';
+                                                if ($match->is_show == 0) {
+                                                    $isActiveColor = 'secondary';
+                                                } else if ($match->is_show == 1) {
+                                                    $isActiveColor = 'success';
+                                                }
+                                            ?>
+                                            <div class="badge badge-{{ $isActiveColor }}">
+                                                {{ $is_show[$match->is_show] }}
                                             </div>
                                         </td>
                                         <td style="width: 15%;">

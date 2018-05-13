@@ -68,18 +68,48 @@
                             <li class="current">
                                 <a href="{{ route('front.home') }}">Home</a>
                             </li>
+                            <li class="current"><a href="{{ route('front.matches') }}">Fixtures and Results</a></li>
+                            <li class="current"><a href="{{ route('front.user_ranking') }}">User Ranking</a></li>
+                            <li class="current"><a href="{{ route('front.group') }}">Groups</a></li>
+                            <li class="current"><a href="{{ route('front.team') }}">Teams</a></li>
+                            @if(!$isLogged)
+                            <li>
+                                
+                                <form class="search" action="{{ route('auth.login') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="username..." name="email" type="email" required="required" value="{{ old('email') }}">
+                                        <input class="form-control" placeholder="password..." name="password" type="password" required="required">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" type="submit" name="login" >Login</button>
+                                        </span>
+                                        @if ($errors->has('email') || $errors->has('password'))
+                                        <label style="position: absolute;width: 100%;margin-top: 45px;" class="error text-danger" for="register-username">
+                                            @if ($errors->has('email'))
+                                            {{ $errors->first('email') }}
+                                            @else
+                                            {{ $errors->first('password') }}
+                                            @endif
+                                        </label>
+                                        @endif
+                                    </div>
+                                </form>
+                            </li>
+                            @else
                             <li class="current">
-                                <a href="#">World Cup</a>
+                                <a href="">Hi, {{ $user->name }}</a>
                                 <ul class="sub-current">
-                                    <li><a href="{{ route('front.team') }}">Teams</a></li>
-                                    <li><a href="{{ route('front.point_table') }}">Point Table</a></li>
-                                    <li><a href="{{ route('front.fixture') }}">Fixtures</a></li>
-                                    <li><a href="{{ route('front.group') }}">Groups</a></li>
+                                    <li>
+                                        <a href="">Prediction history</a>
+                                    </li>
                                 </ul>
                             </li>
-                            <li class="current">
-                                <a href="{{ route('front.result') }}">Results</a>
+                            <li>
+                                <!-- Logout button -->
+                                <a href="{{ route('auth.logout') }}">Logout</a>
+                                <!-- End logout button -->
                             </li>
+                            @endif
                         </ul>
                         <!-- End Menu-->
                     </div>
@@ -94,15 +124,10 @@
                     <li>
                         <a href="{{ route('front.home') }}">Home</a>
                     </li>
-                    <li>
-                        <a href="#">World Cup</a>
-                        <ul>
-                            <li><a href="{{ route('front.team') }}">Teams</a></li>
-                            <li><a href="{{ route('front.point_table') }}">Point Table</a></li>
-                            <li><a href="{{ route('front.fixture') }}">Fixtures</a></li>
-                            <li><a href="{{ route('front.group') }}">Groups</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="{{ route('front.team') }}">Teams</a></li>
+                    <li><a href="{{ route('front.user_ranking') }}">Point Table</a></li>
+                    <li><a href="{{ route('front.matches') }}">Fixtures</a></li>
+                    <li><a href="{{ route('front.group') }}">Groups</a></li>
                     <li>
                         <a href="{{ route('front.result') }}">Results</a>
                     </li>
