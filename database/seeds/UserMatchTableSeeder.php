@@ -14,12 +14,13 @@ class UserMatchTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 1200; $i++) {
+        for ($i = 0; $i < 1500; $i++) {
             DB::table('users_matches')->insert([
                 'user_id'       => rand(1,50),
                 'match_id'      => rand(1,49),
                 'home_score'    => rand(0,6),
                 'away_score'    => rand(0,6),
+                'team_win'      => rand(0,2),
                 'win_match'     => rand(0,1),
                 'win_score'     => rand(0,1),
                 'away_score'    => rand(0,6),

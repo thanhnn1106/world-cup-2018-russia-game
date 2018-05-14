@@ -67,7 +67,10 @@ $router->group([
     $router->group([
         'middleware' => ['auth.front']
     ], function($router) {
-        
+        $router->get('/prediction-history', [
+            'as' => 'pre_history',
+            'uses' => 'UserPreHistoryController@index'
+        ]);
     });
 });
 

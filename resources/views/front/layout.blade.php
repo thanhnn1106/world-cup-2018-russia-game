@@ -100,7 +100,7 @@
                                 <a href="">Hi, {{ $user->name }}</a>
                                 <ul class="sub-current">
                                     <li>
-                                        <a href="">Prediction history</a>
+                                        <a href="{{ route('front.pre_history') }}">Prediction history</a>
                                     </li>
                                 </ul>
                             </li>

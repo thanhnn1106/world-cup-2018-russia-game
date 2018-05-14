@@ -19,6 +19,7 @@ class CreateUsersMatchesTable extends Migration
             $table->integer('match_id');
             $table->integer('home_score');
             $table->integer('away_score');
+            $table->integer('team_win')->nullable()->comment('0=draw, 1=home, 2=away');
             $table->integer('win_match')->nullable();
             $table->integer('win_score')->nullable();
             $table->integer('is_lucky_star');
