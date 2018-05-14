@@ -43,9 +43,9 @@ $router->group([
         'as' => 'home',
         'uses' => 'HomeController@index'
     ]);
-    $router->get('/team', [
-        'as' => 'team',
-        'uses' => 'HomeController@team'
+    $router->get('/team-table', [
+        'as' => 'team_table',
+        'uses' => 'TeamTableController@index'
     ]);
     $router->get('/user-ranking', [
         'as' => 'user_ranking',

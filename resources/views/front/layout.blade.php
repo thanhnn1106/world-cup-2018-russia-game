@@ -71,7 +71,7 @@
                             <li class="current"><a href="{{ route('front.matches') }}">Fixtures and Results</a></li>
                             <li class="current"><a href="{{ route('front.user_ranking') }}">User Ranking</a></li>
                             <li class="current"><a href="{{ route('front.group') }}">Groups</a></li>
-                            <li class="current"><a href="{{ route('front.team') }}">Teams</a></li>
+                            <li class="current"><a href="{{ route('front.team_table') }}">Teams Table</a></li>
                             @if(!$isLogged)
                             <li>
                                 
@@ -124,7 +124,7 @@
                     <li>
                         <a href="{{ route('front.home') }}">Home</a>
                     </li>
-                    <li><a href="{{ route('front.team') }}">Teams</a></li>
+                    <li><a href="{{ route('front.team_table') }}">Teams table</a></li>
                     <li><a href="{{ route('front.user_ranking') }}">Point Table</a></li>
                     <li><a href="{{ route('front.matches') }}">Fixtures</a></li>
                     <li><a href="{{ route('front.group') }}">Groups</a></li>
