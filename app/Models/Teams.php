@@ -13,7 +13,7 @@ class Teams extends Model
     {
         $query = Teams::select('*')
             ->where('group_id', '=', $groupId)
-            ->orderBy('point');
+            ->orderBy('point', 'DESC');
         $result = $query->paginate(LIMIT_ROW);
 
         return $result;

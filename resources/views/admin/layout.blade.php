@@ -64,6 +64,11 @@
                                 <i class="icon-list"></i>Users
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('admin.teams') }}">
+                                <i class="icon-list"></i>Teams
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

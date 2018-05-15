@@ -42,7 +42,7 @@
                         <img src="{{ asset_front('img/clubs-logos') }}//{{ $team->getFlag($team->name) }}" alt="logo-team">
                     </span>
                     <h4>{{ $team->name }}</h4>
-                    <span class="location-team">
+                    <span class="location-team text-danger">
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
                         {{ $team->fifa_position }}
                     </span>
@@ -122,7 +122,7 @@
                         <img src="{{ asset_front('img/clubs-logos') }}//{{ $team->getFlag($team->name) }}" alt="logo-team">
                     </span>
                     <h4>{{ $team->name }}</h4>
-                    <span class="location-team">
+                    <span class="location-team text-danger">
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
                         {{ $team->fifa_position }}
                     </span>
@@ -202,7 +202,7 @@
                         <img src="{{ asset_front('img/clubs-logos') }}//{{ $team->getFlag($team->name) }}" alt="logo-team">
                     </span>
                     <h4>{{ $team->name }}</h4>
-                    <span class="location-team">
+                    <span class="location-team text-danger">
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
                         {{ $team->fifa_position }}
                     </span>
@@ -282,7 +282,7 @@
                         <img src="{{ asset_front('img/clubs-logos') }}//{{ $team->getFlag($team->name) }}" alt="logo-team">
                     </span>
                     <h4>{{ $team->name }}</h4>
-                    <span class="location-team">
+                    <span class="location-team text-danger">
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
                         {{ $team->fifa_position }}
                     </span>
@@ -362,7 +362,7 @@
                         <img src="{{ asset_front('img/clubs-logos') }}//{{ $team->getFlag($team->name) }}" alt="logo-team">
                     </span>
                     <h4>{{ $team->name }}</h4>
-                    <span class="location-team">
+                    <span class="location-team text-danger">
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
                         {{ $team->fifa_position }}
                     </span>
@@ -442,7 +442,7 @@
                         <img src="{{ asset_front('img/clubs-logos') }}//{{ $team->getFlag($team->name) }}" alt="logo-team">
                     </span>
                     <h4>{{ $team->name }}</h4>
-                    <span class="location-team">
+                    <span class="location-team text-danger">
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
                         {{ $team->fifa_position }}
                     </span>
@@ -522,7 +522,7 @@
                         <img src="{{ asset_front('img/clubs-logos') }}//{{ $team->getFlag($team->name) }}" alt="logo-team">
                     </span>
                     <h4>{{ $team->name }}</h4>
-                    <span class="location-team">
+                    <span class="location-team text-danger">
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
                         {{ $team->fifa_position }}
                     </span>
@@ -602,7 +602,7 @@
                         <img src="{{ asset_front('img/clubs-logos') }}//{{ $team->getFlag($team->name) }}" alt="logo-team">
                     </span>
                     <h4>{{ $team->name }}</h4>
-                    <span class="location-team">
+                    <span class="location-team text-danger">
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
                         {{ $team->fifa_position }}
                     </span>

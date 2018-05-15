@@ -121,6 +121,14 @@ Route::group([
             'as'   => 'users.delete',
             'uses' => 'UsersController@delete',
         ]);
+        $router->get('/teams', [
+            'as'   => 'teams',
+            'uses' => 'TeamsController@index',
+        ]);
+        $router->match(['get', 'post'], 'teams/edit/{teamId}', [
+            'as'   => 'teams.edit',
+            'uses' => 'TeamsController@edit',
+        ]);
     });
 });
 
