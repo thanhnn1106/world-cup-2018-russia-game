@@ -121,6 +121,10 @@ Route::group([
             'as'   => 'users.delete',
             'uses' => 'UsersController@delete',
         ]);
+        $router->get('/user-prediction', [
+            'as'   => 'user.predictions',
+            'uses' => 'UsersController@predictions',
+        ]);
         $router->get('/teams', [
             'as'   => 'teams',
             'uses' => 'TeamsController@index',

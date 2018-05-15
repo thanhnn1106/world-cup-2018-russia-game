@@ -69,6 +69,11 @@
                                 <i class="icon-list"></i>Teams
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('admin.user.predictions') }}">
+                                <i class="icon-list"></i>User predictions
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

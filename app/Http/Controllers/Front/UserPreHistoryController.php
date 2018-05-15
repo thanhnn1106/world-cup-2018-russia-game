@@ -12,8 +12,10 @@ class UserPreHistoryController extends BaseController
 {
     public function index(Request $request)
     {
-        $userId = Auth::id();
-        $userHistoryList = User::getUserPreHistory($userId);
+        $params = [
+            'user_id' => Auth::id()
+        ];
+        $userHistoryList = User::getUserPreHistory($params);
         $data = [
             'userHistoryList' => $userHistoryList,
         ];

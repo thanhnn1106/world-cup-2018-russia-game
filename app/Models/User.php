@@ -65,9 +65,9 @@ class User extends Authenticatable
         return $users;
     }
 
-    public static function getUserPreHistory($userId)
+    public static function getUserPreHistory($params = array())
     {
-        $usersHistory = DB::table('users_matches AS um')
+        $query = DB::table('users_matches AS um')
             ->select('um.match_id',
                     'um.home_score AS user_pre_home_score',
                     'um.away_score AS user_pre_away_score',
@@ -79,12 +79,20 @@ class User extends Authenticatable
                     'm.away_team AS match_away_team',
                     'm.home_score AS match_home_score',
                     'm.away_score AS match_away_score',
-                    'm.status AS match_status'
-              )
-            ->rightJoin('matches AS m', 'm.id', '=', 'um.match_id')
-            ->where('um.user_id', '=', $userId)
-            ->orderBy('um.created_at', 'DESC')
-            ->get();
+                    'm.status AS match_status',
+                    'u.name AS user_name',
+                    'u.email AS user_email'
+            );
+            $query->rightJoin('matches AS m', 'm.id', '=', 'um.match_id');
+            $query->rightJoin('users AS u', 'u.id', '=', 'um.user_id');
+            if (isset($params['user_id'])) {
+                $query->where('um.user_id', '=', $params['user_id']);
+            }
+            if (isset($params['email'])) {
+                $query->where('u.email', 'LIKE', '%'.$params['email'].'%');
+            }
+            $query->orderBy('um.created_at', 'DESC');
+        $usersHistory = $query->paginate(20);
 
         return $usersHistory;
     }

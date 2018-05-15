@@ -140,4 +140,19 @@ class UsersController extends Controller
 
         return $rules;
     }
+
+    public function predictions(Request $request)
+    {
+        $params = [
+            'email' => $request->get('email')
+        ];
+        $userHistoryList = User::getUserPreHistory($params);
+        $data = [
+            'userHistoryList' => $userHistoryList,
+            'email'           => $request->get('email')
+
+        ];
+
+        return view('admin.users.predictions', $data);
+    }
 }
