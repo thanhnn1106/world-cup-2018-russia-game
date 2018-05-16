@@ -8,55 +8,51 @@
             <div class="col-md-12">
                 <div class="recent-results results-page">
                     <h1 class="center">Today Matches</h1>
+                    @if (count($todayMatch) > 0)
                     <div class="info-results">
                         <ul>
+                            @foreach ($todayMatch as $item)
                             <li>
                                 <span class="head">
-                                    Portugal Vs Spain <span class="date">27 Jun 2017</span>
+                                    {{ $item->location }} <span class="date">{{ $item->match_date }}</span>
                                 </span>
 
                                 <div class="goals-result">
-                                    <a href="single-team.html">
-                                        <img src="{{ asset_front('img/clubs-logos/por.png') }}" alt="">
-                                        Portugal
+                                    <a href="single-team.html" style="margin-top: 0px;">
+                                        <img src="{{ asset_front('img/clubs-logos') }}/{{ $item->getFlag($item->home_team) }}" alt="">
+                                        {{ $item->home_team }}
                                     </a>
 
-                                    <span class="goals">
-                                        <b>2</b> - <b>3</b>
-                                        <a href="single-result.html" class="btn theme">View More</a>
+                                    <span class="goals" style="width: 20%">
+                                        <input style="width: 40%;" type="number" name="home_score" />
+                                        <span style="color: black;">    -    </span> 
+                                        <input style="width: 40%;" type="number" name="away_score" />
                                     </span>
 
-                                    <a href="single-team.html">
-                                        <img src="{{ asset_front('img/clubs-logos/esp.png') }}" alt="">
-                                        Spain
+                                    <a href="single-team.html" style="margin-top: 0px;">
+                                        <img src="{{ asset_front('img/clubs-logos') }}/{{ $item->getFlag($item->away_team) }}" alt="">
+                                        {{ $item->away_team }}
                                     </a>
                                 </div>
-                            </li>
-
-                            <li>
-                                <span class="head">
-                                    Rusia Vs Colombia <span class="date">30 Jun 2017</span>
-                                </span>
-
                                 <div class="goals-result">
-                                    <a href="single-team.html">
-                                        <img src="{{ asset_front('img/clubs-logos/rusia.png') }}" alt="">
-                                        Rusia
-                                    </a>
-
-                                    <span class="goals">
-                                        <b>2</b> - <b>3</b>
-                                        <a href="single-result.html" class="btn theme">View More</a>
-                                    </span>
-
-                                    <a href="single-team.html">
-                                        <img src="{{ asset_front('img/clubs-logos/colombia.png') }}" alt="">
-                                        Colombia
-                                    </a>
+                                    <label class="container">Win
+                                        <input type="radio" checked="checked" name="match_result">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container">Draw
+                                        <input type="radio" checked="checked" name="match_result">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container">Win
+                                        <input type="radio" checked="checked" name="match_result">
+                                        <span class="checkmark"></span>
+                                    </label>
                                 </div>
                             </li>
+                            @endforeach
                         </ul>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

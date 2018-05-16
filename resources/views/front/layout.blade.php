@@ -15,9 +15,9 @@
 
         <!-- Favicons -->
         <link rel="shortcut icon" href="{{ asset_front('img/icons/favicon.ico') }} ">
-        <link rel="apple-touch-icon" href="{{ asset_front('img/icons/apple-touch-icon.png') }}">
-        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset_front('img/icons/apple-touch-icon-72x72.png') }}">
-        <link rel="apple-touch-icon" sizes="114x114" href="{{ asset_front('img/icons/apple-touch-icon-114x114.png') }}">
+        <link rel="apple-touch-icon" href="{{ asset_front('img/icons/favicon.ico') }}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset_front('img/icons/favicon.ico') }}">
+        <link rel="apple-touch-icon" sizes="114x114" href="{{ asset_front('img/icons/favicon.ico') }}">
         
     </head>
 
@@ -35,7 +35,7 @@
                             <div class="col col-xl-12 text-center">
                                <div class="logo">
                                     <a href="https://www.fifa.com/worldcup/" title="Return Home">
-                                        <img src="{{ asset_front('img/logo-wc-2018.png') }}" alt="Logo" class="logo_img">
+                                        <img src="{{ asset_front('img/logo-wc-2018-new.png') }}" alt="Logo" class="logo_img">
                                     </a>
                                    <h1>TBV PREDICTION WORLD CUP 2018 TOURNAMENT</h1>
                                    <h5>TOURNAMENT STARTS IN:

@@ -4,31 +4,22 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Front\BaseController;
 use Illuminate\Http\Request;
+use App\Models\Matches;
 
 class HomeController extends BaseController
 {
     public function index(Request $request)
     {
-        return view('front.index');
+        $todayMatch = Matches::getToDayMatch();
+        $data = [
+            'todayMatch' => $todayMatch
+        ];
+
+        return view('front.index', $data);
     }
-    public function team(Request $request)
-    {
-        return view('front.team');
-    }
-    public function pointTable(Request $request)
-    {
-        return view('front.table-point');
-    }
-    public function fixture(Request $request)
-    {
-        return view('front.fixture');
-    }
+
     public function group(Request $request)
     {
         return view('front.group');
-    }
-    public function result(Request $request)
-    {
-        return view('front.result');
     }
 }

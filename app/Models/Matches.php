@@ -14,7 +14,6 @@ class Matches extends Model
         return $this->belongsToMany(User::class, 'users_matches', 'match_id', 'user_id');
     }
 
-
     public static function getList($params)
     {
         $query = Matches::select('*');
@@ -26,6 +25,16 @@ class Matches extends Model
         }
         $query->orderBy('match_date');
         $result = $query->paginate(LIMIT_ROW);
+
+        return $result;
+    }
+
+    public static function getToDayMatch()
+    {
+        $query = Matches::select('*')
+            ->where('is_show', '=', 1)
+            ->orderBy('match_date');
+        $result = $query->get();
 
         return $result;
     }
