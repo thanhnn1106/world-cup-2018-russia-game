@@ -69,7 +69,11 @@ $router->group([
     ], function($router) {
         $router->get('/prediction-history', [
             'as' => 'pre_history',
-            'uses' => 'UserPreHistoryController@index'
+            'uses' => 'UsersController@predictionHistory'
+        ]);
+        $router->post('/predict', [
+            'as' => 'predict',
+            'uses' => 'UsersController@predict'
         ]);
     });
 });

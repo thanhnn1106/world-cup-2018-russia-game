@@ -12,43 +12,52 @@
                     <div class="info-results">
                         <ul>
                             @foreach ($todayMatch as $item)
-                            <li>
-                                <span class="head">
-                                    {{ $item->location }} <span class="date">{{ $item->match_date }}</span>
-                                </span>
+                                <li>
+                                    <form id="match_{{ $item->id }}" method="POST" action="{{ route('front.predict') }}">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="match_id" value="{{ $item->id }}" />
+                                        <span class="head">
+                                            {{ $item->location }} <span class="date">{{ $item->match_date }}</span>
+                                        </span>
 
-                                <div class="goals-result">
-                                    <a href="single-team.html" style="margin-top: 0px;">
-                                        <img src="{{ asset_front('img/clubs-logos') }}/{{ $item->getFlag($item->home_team) }}" alt="">
-                                        {{ $item->home_team }}
-                                    </a>
+                                        <div class="goals-result">
+                                            <a href="single-team.html" style="margin-top: 0px;">
+                                                <img src="{{ asset_front('img/clubs-logos') }}/{{ $item->getFlag($item->home_team) }}" alt="">
+                                                {{ $item->home_team }}
+                                            </a>
 
-                                    <span class="goals" style="width: 20%">
-                                        <input style="width: 40%;" type="number" name="home_score" />
-                                        <span style="color: black;">    -    </span> 
-                                        <input style="width: 40%;" type="number" name="away_score" />
-                                    </span>
+                                            <span class="goals" style="width: 20%">
+                                                <input style="width: 40%;" type="number" name="home_score" />
+                                                <span style="color: black;">    -    </span> 
+                                                <input style="width: 40%;" type="number" name="away_score" />
+                                            </span>
 
-                                    <a href="single-team.html" style="margin-top: 0px;">
-                                        <img src="{{ asset_front('img/clubs-logos') }}/{{ $item->getFlag($item->away_team) }}" alt="">
-                                        {{ $item->away_team }}
-                                    </a>
-                                </div>
-                                <div class="goals-result">
-                                    <label class="container">Win
-                                        <input type="radio" checked="checked" name="match_result">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container">Draw
-                                        <input type="radio" checked="checked" name="match_result">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container">Win
-                                        <input type="radio" checked="checked" name="match_result">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                            </li>
+                                            <a href="single-team.html" style="margin-top: 0px;">
+                                                <img src="{{ asset_front('img/clubs-logos') }}/{{ $item->getFlag($item->away_team) }}" alt="">
+                                                {{ $item->away_team }}
+                                            </a>
+                                        </div>
+                                        <div class="goals-result">
+                                            <label class="container">{{ $item->home_team }} Win
+                                                <input type="radio" value="1" checked="checked" name="match_result">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <label class="container">Draw
+                                                <input type="radio" value="0" checked="checked" name="match_result">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <label class="container">{{ $item->away_team }} Win
+                                                <input type="radio" value="2" checked="checked" name="match_result">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        @if($isLogged)
+                                        <span class="head text-center">
+                                            <button type="submit" class="btn btn-success text-light">Save</button>
+                                        </span>
+                                        @endif
+                                    </form>
+                                </li>
                             @endforeach
                         </ul>
                     </div>

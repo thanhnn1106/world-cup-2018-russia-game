@@ -8,10 +8,23 @@ use App\Models\User;
 use App\Models\Matches;
 use Illuminate\Support\Facades\Auth;
 
-class UserPreHistoryController extends BaseController
+class UsersController extends BaseController
 {
-    public function index(Request $request)
+    public function predictionHistory(Request $request)
     {
+        $params = [
+            'user_id' => Auth::id()
+        ];
+        $userHistoryList = User::getUserPreHistory($params);
+        $data = [
+            'userHistoryList' => $userHistoryList,
+        ];
+
+        return view('front.user_pre_history.index', $data);
+    }
+
+    public function predict(Request $request)
+    {   echo "<pre>"; print_r($_POST);exit;
         $params = [
             'user_id' => Auth::id()
         ];
