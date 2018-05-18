@@ -55,7 +55,6 @@ class MatchController extends Controller
             $match->home_score    = $request->get('home_score');
             $match->away_score    = $request->get('away_score');
             $match->is_show       = $request->get('is_show');
-            $match->is_lucky_star = $request->get('is_lucky_star');
             $match->status        = $request->get('status');
             $match->save();
 
@@ -87,7 +86,6 @@ class MatchController extends Controller
         $rules =  array(
             'status'        => 'required|in:'. implode(',', $status),
             'is_show'       => 'required|in:0,1',
-            'is_lucky_star' => 'required|in:0,1',
         );
 
         return $rules;

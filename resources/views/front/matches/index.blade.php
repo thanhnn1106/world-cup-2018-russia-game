@@ -9,7 +9,7 @@
         </div>
 
         <div class="col-lg-12">
-            <table class="table-responsive table-hover">
+            <table class="table-striped table-responsive table-hover">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -27,33 +27,29 @@
                     @else
                     @foreach($matchList as $match)
                     <tr>
-                        <td>{{ $match->id }}</td>
-                        <td>{{ $match->round }}</td>
-                        <td>{{ $match->group }}</td>
-                        <td>
-                            <div>
-                                <table style="border: none !important;" border="0" cellspacing="0" cellpadding="0">
-                                    <tr style="border: none;">
-                                        <td style="width: 40%; border: none;">
-                                            @if ($match->id < 49)
-                                            <img src="{{ asset_front('img/clubs-logos') }}/{{ $match->getFlag($match->home_team) }}" alt="icon1">
-                                            @endif
-                                            <strong style="line-height: 2.8em;">{{ $match->home_team }}</strong>
-                                        </td>
-                                        <td style="width: 20%; border: none;;" class="text-center">vs</td>
-                                        <td style="width: 40%;; border: none;">
-                                            <strong style="line-height: 2.8em;">{{ $match->away_team }}</strong>
-                                            @if ($match->id < 49)
-                                            <img src="{{ asset_front('img/clubs-logos') }}/{{ $match->getFlag($match->away_team) }}" alt="icon">
-                                            @endif
-                                        </td>
-                                    </tr>
-                                </table>
+                        <td style="width:5%">{{ $match->id }}</td>
+                        <td style="width:5%">{{ $match->round }}</td>
+                        <td style="width:10%">{{ $match->group }}</td>
+                        <td style="width:40%">
+                            <div style="width: 40%; float: left;">
+                                @if ($match->id < 49)
+                                <img src="{{ asset_front('img/clubs-logos') }}/{{ $match->getFlag($match->home_team) }}" alt="icon1">
+                                @endif
+                                <strong style="line-height: 2.8em;">{{ $match->home_team }}</strong>
+                            </div>
+                            <div style="width: 20%; float: left; line-height: 2.8em;">
+                                vs
+                            </div>
+                            <div style="width: 40%; float: left;">
+                                <strong style="line-height: 2.8em;">{{ $match->away_team }}</strong>
+                                @if ($match->id < 49)
+                                <img src="{{ asset_front('img/clubs-logos') }}/{{ $match->getFlag($match->away_team) }}" alt="icon">
+                                @endif
                             </div>
                         </td>
-                        <td>{{ $match->home_score }} - {{ $match->away_score }}</td>
-                        <td>{{ $status[$match->status] }}</td>
-                        <td>{{ $match->match_date }} <br /> {{ $match->location }}</td>
+                        <td style="width:10%">{{ $match->home_score }} - {{ $match->away_score }}</td>
+                        <td style="width:10%">{{ $status[$match->status] }}</td>
+                        <td style="width:20%">{{ $match->match_date }} <br /> {{ $match->location }}</td>
                     </tr>
                     @endforeach
                     @endif

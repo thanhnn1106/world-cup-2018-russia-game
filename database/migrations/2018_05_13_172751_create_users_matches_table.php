@@ -22,7 +22,7 @@ class CreateUsersMatchesTable extends Migration
             $table->integer('team_win')->nullable()->comment('0=draw, 1=home, 2=away');
             $table->integer('win_match')->nullable();
             $table->integer('win_score')->nullable();
-            $table->integer('is_lucky_star');
+            $table->integer('is_lucky_star')->default(0)->comment('0=no, 1=yes');
             $table->integer('point')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

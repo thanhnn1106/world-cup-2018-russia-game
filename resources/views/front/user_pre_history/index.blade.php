@@ -27,21 +27,17 @@
                     @foreach ($userHistoryList as $item)
                     <tr>
                         <td class="text-center number">{{ $i }}</td>
-                        <td class="text-left">
-                            <div>
-                                <table style="border: none !important;" border="0" cellspacing="0" cellpadding="0">
-                                    <tr style="border: none;">
-                                        <td style="width: 40%; border: none;">
-                                            <img src="{{ asset_front('img/clubs-logos') }}/{{ App\Models\User::getFlag($item->match_home_team) }}" alt="icon1">
-                                            <strong style="line-height: 2.0em;">{{ $item->match_home_team }}</strong>
-                                        </td>
-                                        <td style="width: 5%; border: none;;" class="text-center">vs</td>
-                                        <td style="width: 40%;; border: none;">
-                                            <strong style="line-height: 2.0em;">{{ $item->match_away_team }}</strong>
-                                            <img src="{{ asset_front('img/clubs-logos') }}/{{ App\Models\User::getFlag($item->match_away_team) }}" alt="icon">
-                                        </td>
-                                    </tr>
-                                </table>
+                        <td class="text-left" style="width: 50%;">
+                            <div style="width: 40%; float: left;">
+                                <img src="{{ asset_front('img/clubs-logos') }}/{{ App\Models\User::getFlag($item->match_home_team) }}" alt="icon1">
+                                <strong style="line-height: 2.0em;">{{ $item->match_home_team }}</strong>
+                            </div>
+                            <div style="width: 20%; float: left;">
+                                vs
+                            </div>
+                            <div style="width: 40%; float: left;">
+                                <strong style="line-height: 2.0em;">{{ $item->match_away_team }}</strong>
+                                <img src="{{ asset_front('img/clubs-logos') }}/{{ App\Models\User::getFlag($item->match_away_team) }}" alt="icon">
                             </div>
                         </td>
                         <td class="text-center">{{ $item->match_home_score }} - {{ $item->match_away_score }}</td>
@@ -50,7 +46,7 @@
                         <td class="text-center">{{ $item->match_status }}</td>
                         <td class="text-center">{{ ($item->user_is_lucky_star == 0) ? 'No' : 'Yes' }}</td>
                         <td class="text-center">{{ $item->user_point }}</td>
-                        <td class="text-center">{{ $item->created_at }}</td>
+                        <td class="text-center" style="width: 10%;">{{ $item->created_at }}</td>
                     </tr>
                     <?php ++$i; ?>
                     @endforeach

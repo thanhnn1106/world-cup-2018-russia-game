@@ -7,6 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="recent-results results-page">
+                    @include('notifications')
                     <h1 class="center">Today Matches</h1>
                     @if (count($todayMatch) > 0)
                     <div class="info-results">
@@ -27,9 +28,9 @@
                                             </a>
 
                                             <span class="goals" style="width: 20%">
-                                                <input style="width: 40%;" type="number" name="home_score" />
+                                                <input min="0" style="width: 40%;text-align: center;" type="number" name="home_score" value="{{ $item->home_score }}" />
                                                 <span style="color: black;">    -    </span> 
-                                                <input style="width: 40%;" type="number" name="away_score" />
+                                                <input min="0" style="width: 40%;text-align: center;" type="number" name="away_score"  value="{{ $item->away_score }}" />
                                             </span>
 
                                             <a href="single-team.html" style="margin-top: 0px;">
@@ -39,21 +40,24 @@
                                         </div>
                                         <div class="goals-result">
                                             <label class="container">{{ $item->home_team }} Win
-                                                <input type="radio" value="1" checked="checked" name="match_result">
+                                                <input type="radio" value="1" @if ($item->team_win == 1) checked="checked" @endif name="match_result">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <label class="container">Draw
-                                                <input type="radio" value="0" checked="checked" name="match_result">
+                                                <input type="radio" value="0" @if ($item->team_win == 0) checked="checked" @endif name="match_result">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <label class="container">{{ $item->away_team }} Win
-                                                <input type="radio" value="2" checked="checked" name="match_result">
+                                                <input type="radio" value="2" @if ($item->team_win == 2) checked="checked" @endif name="match_result">
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         @if($isLogged)
-                                        <span class="head text-center">
-                                            <button type="submit" class="btn btn-success text-light">Save</button>
+                                        <span class="head text-center" style="padding:10px 0px;">
+                                            <input type="checkbox" value="1" name="is_lucky_star" @if ($item->is_lucky_star == 1) checked="checked" @endif /><label>Use lucky star</label>
+                                        </span>
+                                        <span class="head text-center" style="padding:0px;">
+                                            <button class="btn btn-success text-light" style="margin-bottom:10px;">Save</button>
                                         </span>
                                         @endif
                                     </form>

@@ -77,22 +77,6 @@
                                 @endif
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 form-control-label">Lucky star</label>
-                                <div class="col-sm-10">
-                                  <div class="i-checks">
-                                    <input id="is_lucky_star_1" type="radio" value="1" @if (old('is_lucky_star', isset($matchInfo->is_lucky_star) ? $matchInfo->is_lucky_star : '') == 1) checked="checked" @endif name="is_lucky_star" class="form-control-custom radio-custom">
-                                    <label for="is_lucky_star_1">Yes</label>
-                                  </div>
-                                  <div class="i-checks">
-                                    <input id="is_lucky_star_0" type="radio" value="0" @if (old('is_lucky_star', isset($matchInfo->is_lucky_star) ? $matchInfo->is_lucky_star : '') != 1) checked="checked" @endif name="is_lucky_star" class="form-control-custom radio-custom">
-                                    <label for="is_lucky_star_0">No</label>
-                                  </div>
-                                </div>
-                                @if ($errors->has('is_lucky_star'))
-                                <div class="invalid-feedback">{{ $errors->first('is_lucky_star') }}</div>
-                                @endif
-                            </div>
-                            <div class="form-group row">
                                 <label class="col-sm-2 form-control-label">Trạng thái</label>
                                 <div class="col-sm-10 mb-3">
                                     <select name="status" class="form-control @if ($errors->has('status'))is-invalid @endif">

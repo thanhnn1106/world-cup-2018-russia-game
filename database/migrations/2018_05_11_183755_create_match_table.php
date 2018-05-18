@@ -21,7 +21,6 @@ class CreateMatchTable extends Migration
             $table->integer('home_score')->nullable();
             $table->integer('away_score')->nullable();
             $table->datetime('match_date');
-            $table->integer('is_lucky_star')->default(0)->comment('0=inactive, 1=active');
             $table->string('group')->nullable();
             $table->string('location')->nullable();
             $table->integer('is_show')->default(0)->comment('0=inactive, 1=active');
