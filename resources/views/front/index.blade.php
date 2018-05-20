@@ -53,11 +53,13 @@
                                             </label>
                                         </div>
                                         @if($isLogged)
+                                        @if ($user->luckystar == 1)
                                         <span class="head text-center" style="padding:10px 0px;">
                                             <input type="checkbox" value="1" name="is_lucky_star" @if ($item->is_lucky_star == 1) checked="checked" @endif /><label>Use lucky star</label>
                                         </span>
+                                        @endif
                                         <span class="head text-center" style="padding:0px;">
-                                            <button class="btn btn-success text-light" style="margin-bottom:10px;">Save</button>
+                                            <button class="btn btn-success text-light" style="margin: 10px 10px;">Save</button>
                                         </span>
                                         @endif
                                     </form>

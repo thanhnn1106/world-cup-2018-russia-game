@@ -20,6 +20,7 @@ class UsersController extends BaseController
         $userHistoryList = User::getUserPreHistory($params);
         $data = [
             'userHistoryList' => $userHistoryList,
+            'match_status'    => config('site.match_status.label')
         ];
 
         return view('front.user_pre_history.index', $data);
@@ -28,13 +29,21 @@ class UsersController extends BaseController
     public function predict(Request $request)
     {
         if ($request->isMethod('POST')) {
+            $isLuckyStar = $request->get('is_lucky_star');
+            if ($isLuckyStar !== NULL) {
+                $checkIfUsed = User::find(Auth::id());
+                if ($checkIfUsed->luckystar == 0) {
+                    $request->session()->flash('error', trans('You already used lucky star.'));
+                    return redirect()->route('front.home');
+                }
+            }
             $params = [
                 'user_id'       => Auth::id(),
                 'match_id'      => $request->get('match_id'),
                 'home_score'    => $request->get('home_score'),
                 'away_score'    => $request->get('away_score'),
                 'team_win'      => $request->get('match_result'),
-                'is_lucky_star' => (!empty($request->get('is_lucky_star'))) ? $request->get('is_lucky_star') : 0,
+                'is_lucky_star' => $request->get('is_lucky_star') == 1 ? 1 : 0,
             ];
             $rules = $this->_setRules($params);
 
@@ -53,14 +62,20 @@ class UsersController extends BaseController
                 ->first();
 
             if ($chkExistRecord === NULL) {
-                $data['created_at'] = date('Y-m-d H:i:s');
+                $params['created_at'] = date('Y-m-d H:i:s');
                 DB::table('users_matches')->insert($params);
+                if ($params['is_lucky_star'] == 1) {
+                    DB::table('users')->where('id', '=', $params['user_id'])
+                        ->update([
+                            'luckystar' => 0
+                        ]);
+                }
 
                 $request->session()->flash('success', trans('common.msg_save_success'));
                 return redirect()->route('front.home');
             }
 
-            $data['updated_at'] = date('Y-m-d H:i:s');
+            $params['updated_at'] = date('Y-m-d H:i:s');
             DB::table('users_matches')
                ->where('user_id', $params['user_id'])
                ->where('match_id', $params['match_id'])

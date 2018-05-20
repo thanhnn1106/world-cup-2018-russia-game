@@ -109,6 +109,10 @@ Route::group([
             'as'   => 'matches.delete',
             'uses' => 'MatchController@delete',
         ]);
+        $router->get('matches/update-result/{matchId}', [
+            'as'   => 'matches.update_result',
+            'uses' => 'MatchController@updateResult',
+        ]);
         $router->get('/users', [
             'as'   => 'users',
             'uses' => 'UsersController@index',
@@ -128,6 +132,10 @@ Route::group([
         $router->get('/user-prediction', [
             'as'   => 'user.predictions',
             'uses' => 'UsersController@predictions',
+        ]);
+        $router->match(['get', 'post'], 'users/update-prediction/{userId}/{matchId}', [
+            'as'   => 'users.update_prediction',
+            'uses' => 'UsersController@updatePrediction',
         ]);
         $router->get('/teams', [
             'as'   => 'teams',

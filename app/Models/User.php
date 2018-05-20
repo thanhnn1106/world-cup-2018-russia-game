@@ -69,6 +69,7 @@ class User extends Authenticatable
     {
         $query = DB::table('users_matches AS um')
             ->select('um.match_id',
+                    'um.user_id',
                     'um.home_score AS user_pre_home_score',
                     'um.away_score AS user_pre_away_score',
                     'um.is_lucky_star AS user_is_lucky_star',
@@ -84,7 +85,7 @@ class User extends Authenticatable
                     'u.email AS user_email'
             );
             $query->rightJoin('matches AS m', 'm.id', '=', 'um.match_id');
-            $query->rightJoin('users AS u', 'u.id', '=', 'um.user_id');
+            $query->join('users AS u', 'u.id', '=', 'um.user_id');
             if (isset($params['user_id'])) {
                 $query->where('um.user_id', '=', $params['user_id']);
             }

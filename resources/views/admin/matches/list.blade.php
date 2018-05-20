@@ -120,7 +120,7 @@
                                                Delete
                                             </a>
                                             @if ($match->status == 2)
-                                                <a  href="#" class="btn btn-success btn-xs">
+                                                <a  href="{{ route('admin.matches.update_result', ['matchId' => $match->id]) }}" class="btn btn-success btn-xs">
                                                    Update result
                                                 </a>
                                             @endif

@@ -49,11 +49,12 @@
                                         <th>Is lucky star</th>
                                         <th>Point</th>
                                         <th>Created at</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if ($userHistoryList->count() == 0)
-                                        <tr><td colspan="8" align="center">Data not found</td></tr>
+                                        <tr><td colspan="9" align="center">Data not found</td></tr>
                                     @else
                                     <?php $i = ($userHistoryList->currentpage()-1) * $userHistoryList->perpage() + 1; ?>
                                     @foreach($userHistoryList as $item)
@@ -62,11 +63,24 @@
                                         <td>{{ $item->user_name }}</td>
                                         <td>{{ $item->user_email }}</td>
                                         <td>{{ $item->match_home_team }} {{ $item->match_home_score }} - {{ $item->match_away_score }} {{ $item->match_away_team }}</td>
-                                        <td>{{ $item->user_pre_team_win }}</td>
+                                        <td>
+                                            @if ($item->user_pre_team_win == 0)
+                                            Draw
+                                            @elseif ($item->user_pre_team_win == 1)
+                                            {{ $item->match_home_team }}
+                                            @else
+                                            {{ $item->match_away_team }}
+                                            @endif
+                                        </td>
                                         <td>{{ $item->user_pre_home_score }} - {{ $item->user_pre_away_score }}</td>
                                         <td>{{ $item->user_is_lucky_star }}</td>
                                         <td>{{ $item->user_point }}</td>
                                         <td>{{ $item->created_at }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.users.update_prediction', ['userId' => $item->user_id, 'matchId' => $item->match_id]) }}" class="btn btn-warning btn-xs">
+                                                Cập nhật
+                                            </a>
+                                        </td>
                                     </tr>
                                     @endforeach
                                     @endif

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Matches;
 use Validator;
-use Illuminate\Support\Facades\DB;
+use DB;
 
 class MatchController extends Controller
 {
@@ -89,5 +89,70 @@ class MatchController extends Controller
         );
 
         return $rules;
+    }
+
+    public function updateResult(Request $request, $matchId)
+    {
+        $matchInfo = Matches::find($matchId);
+        $userMatchList = DB::table('users_matches')
+            ->select('user_id')
+            ->where('match_id', '=', $matchId)
+            ->get()->toArray();
+//        echo "<pre>"; print_r($userMatchList);exit;
+        // Caculate result
+        foreach ($userMatchList as $um) {
+            $updateResult = DB::table('users_matches')
+                ->where('user_id', '=', $um->user_id)
+                ->where('match_id', '=', $matchInfo->id)
+                ->first();
+            $point = 0;
+            $isWinScore = 0;
+            $isWinMatch = 0;
+            if ($matchInfo->home_score == $updateResult->home_score &&
+                $matchInfo->away_score == $updateResult->away_score)
+            {
+                $isWinScore = 1;
+                $point = $point + 2;
+            }
+
+            if ($matchInfo->home_score > $matchInfo->away_score && $updateResult->team_win == 1)
+            {
+                $isWinMatch = 1;
+                $point = $point + 1;
+            }
+
+            if ($matchInfo->home_score < $matchInfo->away_score && $updateResult->team_win == 2)
+            {
+                $isWinMatch = 1;
+                $point = $point + 1;
+            }
+
+            if ($matchInfo->home_score == $matchInfo->away_score && $updateResult->team_win == 0)
+            {
+                $isWinMatch = 1;
+                $point = $point + 1;
+            }
+
+            if ($updateResult->is_lucky_star == 1)
+            {
+                $point = $point * 2;
+            }
+
+            DB::table('users_matches')
+                ->where('user_id', '=', $um->user_id)
+                ->where('match_id', '=', $matchInfo->id)
+                ->update([
+                    'win_match' => $isWinMatch,
+                    'win_score' => $isWinScore,
+                    'point'     => $point,
+                ]);
+        }
+        DB::table('matches')
+                ->where('id', '=', $matchInfo->id)
+                ->update([
+                    'status' => 3,
+                ]);
+        $request->session()->flash('success', trans('common.msg_update_success'));
+        return redirect()->route('admin.matches');
     }
 }

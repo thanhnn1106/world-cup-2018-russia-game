@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Validator;
+use DB;
 
 class UsersController extends Controller
 {
@@ -155,4 +156,55 @@ class UsersController extends Controller
 
         return view('admin.users.predictions', $data);
     }
+
+    public function updatePrediction(Request $request, $userId, $matchId)
+    {
+        $userMatch = DB::table('users_matches')
+            ->select('*')
+            ->first();
+        if ($userMatch === NULL) {
+            $request->session()->flash('error', trans('common.msg_data_not_found'));
+            return redirect(route('admin.user.predictions'));
+        }
+
+        $data = array(
+            'actionForm' => route('admin.users.update_prediction', ['userId' => $userId, 'matchId' => $matchId]),
+            'userMatch'  => $userMatch,
+            'title'      => 'Update',
+        );
+
+        if ($request->isMethod('POST')) {
+
+            $rules =  array(
+                'is_lucky_star' => 'required|in:0,1',
+            );
+
+            // run the validation rules on the inputs from the form
+            $validator = Validator::make($request->all(), $rules);
+
+            if ($validator->fails()) {
+                return redirect()->route('admin.users.update_prediction', ['userId' => $userMatch->user_id, 'matchId' => $userMatch->match_id])
+                            ->withErrors($validator)
+                            ->withInput();
+            }
+
+            $userMatchUpdate = DB::table('users_matches')
+                ->where('user_id', '=', $userMatch->user_id)
+                ->where('user_id', '=', $userMatch->match_id)
+                ->update([
+                    'is_lucky_star' => $request->get('is_lucky_star')
+                ]);
+            $user = DB::table('users')
+                ->where('id', '=', $userMatch->user_id)
+                ->update([
+                    'luckystar' => $request->get('is_lucky_star') == 1 ? 0 : 1
+                ]);
+
+            $request->session()->flash('success', trans('common.msg_update_success'));
+            return redirect()->route('admin.user.predictions');
+        }
+
+        return view('admin.users.update_prediction', $data);
+    }
+
 }

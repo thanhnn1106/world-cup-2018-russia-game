@@ -10,8 +10,8 @@
                         <th class="text-center">No.</th>
                         <th class="text-center">Match</th>
                         <th class="text-center">Match result</th>
-                        <th class="text-center">User predict match</th>
-                        <th class="text-center">User predict score</th>
+                        <th class="text-center">Predict team win</th>
+                        <th class="text-center">Predict score</th>
                         <th class="text-center">Match status</th>
                         <th class="text-center">Use lucky star</th>
                         <th class="text-center">Point</th>
@@ -41,9 +41,33 @@
                             </div>
                         </td>
                         <td class="text-center">{{ $item->match_home_score }} - {{ $item->match_away_score }}</td>
+                        <td class="text-center">
+                            @if ($item->user_pre_team_win == 0)
+                            Draw
+                            @elseif ($item->user_pre_team_win == 1)
+                            {{ $item->match_home_team }}
+                            @else
+                            {{ $item->match_away_team }}
+                            @endif
+                        </td>
                         <td class="text-center">{{ $item->user_pre_home_score }} - {{ $item->user_pre_away_score }}</td>
-                        <td class="text-center">{{ $item->user_pre_team_win }}</td>
-                        <td class="text-center">{{ $item->match_status }}</td>
+                        <td class="text-center">
+                            <?php
+                                $matchColor = '';
+                                if ($item->match_status == 3) {
+                                    $matchColor = 'secondary';
+                                } else if ($item->match_status == 2) {
+                                    $matchColor = 'warning';
+                                } else if ($item->match_status == 1) {
+                                    $matchColor = 'success';
+                                } else if ($item->match_status == 0) {
+                                    $matchColor = 'info';
+                                }
+                            ?>
+                            <div class="badge badge-{{ $matchColor }}">
+                                {{ $match_status[$item->match_status] }}
+                            </div>
+                        </td>
                         <td class="text-center">{{ ($item->user_is_lucky_star == 0) ? 'No' : 'Yes' }}</td>
                         <td class="text-center">{{ $item->user_point }}</td>
                         <td class="text-center" style="width: 10%;">{{ $item->created_at }}</td>
