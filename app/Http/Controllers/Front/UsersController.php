@@ -9,6 +9,7 @@ use App\Models\Matches;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use Validator;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends BaseController
 {
@@ -99,4 +100,43 @@ class UsersController extends BaseController
 
         return $rules;
     }
+
+    public function changePass(Request $request, $userId = null)
+    {
+        if ($request->isMethod('POST')) {
+            $currentPass    = $request->get('current_password');
+            $newPass        = $request->get('new_password');
+            $confirmNewPass = $request->get('confirm_password');
+            if (!Hash::check($currentPass, Auth::user()->password)) {
+                $request->session()->flash('error', trans('common.change_password.msg_invalid_current_password'));
+                return redirect()->route('front.change_password');
+            }
+
+            $rules =  array(
+                'new_password'     => 'required|min:8',
+                'confirm_password' => 'required_with:new_password|same:new_password|min:8',
+            );
+            $params = [
+                'new_password'     => $newPass,
+                'confirm_password' => $confirmNewPass
+            ];
+            // run the validation rules on the inputs from the form
+            $validator = Validator::make($params, $rules);
+
+            if ($validator->fails()) {
+                return redirect()->route('front.change_password')
+                                ->withErrors($validator)
+                                ->withInput();
+            }
+            $userIndfo = User::find(Auth::user()->id);
+            $userIndfo->password = bcrypt($params['new_password']);
+            $userIndfo->save();
+
+            $request->session()->flash('success', trans('common.change_password.msg_changed_password_success'));
+            return redirect()->route('front.change_password');
+        }
+
+        return view('front.user_change_password.index');
+    }
+
 }

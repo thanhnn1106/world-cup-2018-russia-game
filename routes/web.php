@@ -75,6 +75,10 @@ $router->group([
             'as' => 'predict',
             'uses' => 'UsersController@predict'
         ]);
+        $router->match(['get', 'post'], '/user/change-password/{userId?}', [
+            'as'   => 'change_password',
+            'uses' => 'UsersController@changePass',
+        ]);
     });
 });
 
