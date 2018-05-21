@@ -2,7 +2,7 @@
 @section('content')
 
 <!-- Parallax Section - Players -->
-<div class="parallax-section parallax-total" style="background:url({{ asset_front('img/slide/1.jpg') }});">
+<div class="parallax-section parallax-total" style="background:url({{ asset_front('img/slide/wc14.jpg') }});">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">

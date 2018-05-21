@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Front\BaseController;
 use Illuminate\Http\Request;
 use App\Models\Matches;
+use App\Models\User;
 use DB;
 
 class HomeController extends BaseController
@@ -40,4 +41,5 @@ class HomeController extends BaseController
     {
         return view('front.group');
     }
+
 }
