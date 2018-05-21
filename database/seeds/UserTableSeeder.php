@@ -22,13 +22,13 @@ class UserTableSeeder extends Seeder
                 'status'     => $status,
                 'created_at' => date(DATETIME_FORMAT),
             ),
-            array(
-                'name'       => 'Nguyễn Hoàng Thy',
-                'email'      => 'nthy@gmail.com',
-                'password'   => bcrypt('123456'),
-                'status'     => $status,
-                'created_at' => date(DATETIME_FORMAT),
-            ),
+//            array(
+//                'name'       => 'Nguyễn Hoàng Thy',
+//                'email'      => 'nthy@gmail.com',
+//                'password'   => bcrypt('123456'),
+//                'status'     => $status,
+//                'created_at' => date(DATETIME_FORMAT),
+//            ),
         ];
 
         foreach ($users as $user) {
@@ -38,15 +38,15 @@ class UserTableSeeder extends Seeder
             }
         }
 
-        $faker = Faker::create();
-        for ($i = 0; $i < 50; $i++) {
-            DB::table('users')->insert([
-                'name'       => $faker->name,
-                'email'      => $faker->email,
-                'password'   => bcrypt($faker->password),
-                'status'     => rand(0,1),
-                'created_at' => date(DATETIME_FORMAT),
-            ]);
-        }
+//        $faker = Faker::create();
+//        for ($i = 0; $i < 50; $i++) {
+//            DB::table('users')->insert([
+//                'name'       => $faker->name,
+//                'email'      => $faker->email,
+//                'password'   => bcrypt($faker->password),
+//                'status'     => rand(0,1),
+//                'created_at' => date(DATETIME_FORMAT),
+//            ]);
+//        }
     }
 }

@@ -72,6 +72,7 @@
                             <li class="current"><a href="{{ route('front.user_ranking') }}">User Ranking</a></li>
                             <li class="current"><a href="{{ route('front.group') }}">Groups</a></li>
                             <li class="current"><a href="{{ route('front.team_table') }}">Teams Table</a></li>
+                            <li class="current"><a href="{{ route('front.rules') }}">Rules of game</a></li>
                             @if(!$isLogged)
                             <li>
                                 
@@ -133,6 +134,7 @@
                     <li>
                         <a href="{{ route('front.team_table') }}">Teams Table</a>
                     </li>
+                    <li><a href="{{ route('front.rules') }}">Rules of game</a></li>
                     @if(!$isLogged)
                     <li>
                         <form class="search" action="{{ route('auth.login') }}" method="POST">

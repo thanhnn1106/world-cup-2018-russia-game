@@ -22,11 +22,11 @@ class Controller extends BaseController
         $this->middleware(function ($request, $next) {
             $this->user      = Auth::user();
             $this->isLogged  = ! empty ($this->user) ? true : false;
-            $this->topUsers  = User::getUserRanking();
+            $this->numberOfUsers  = count(User::getUserRanking());
 
             view()->share('isLogged', $this->isLogged);
             view()->share('user', $this->user);
-            view()->share('topUsers', $this->topUsers);
+            view()->share('numberOfUsers', $this->numberOfUsers);
 
             return $next($request);
         });

@@ -18,7 +18,7 @@
                                         {{ csrf_field() }}
                                         <input type="hidden" name="match_id" value="{{ $item->id }}" />
                                         <span class="head">
-                                            {{ $item->location }} <span class="date">{{ $item->match_date }}</span>
+                                            {{ $item->location }}<span class="date col-lg-4">{{ $item->match_date }}</span><span class="date col-lg-4 pull-left text-uppercase">{{ $item->group }}</span>
                                         </span>
 
                                         <div class="goals-result">
@@ -68,6 +68,23 @@
                         </ul>
                     </div>
                     @endif
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xl-6">
+                <div class="item-boxed-img">
+                    <i class="fa fa-user"></i>
+                    <h4>Number of users </h4>
+                    <h1>{{ $numberOfUsers }}</h1>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-6">
+                <div class="item-boxed-img">
+                    <i class="fa fa-money"></i>
+                    <h4>Total prize</h4>
+                    <h1>{{ number_format($numberOfUsers * 200000, 0) }} VNĐ</h1>
                 </div>
             </div>
         </div>

@@ -63,6 +63,10 @@ $router->group([
         'as' => 'result',
         'uses' => 'HomeController@result'
     ]);
+    $router->get('/rules', [
+        'as' => 'rules',
+        'uses' => 'HomeController@rules'
+    ]);
     // Require login
     $router->group([
         'middleware' => ['auth.front']

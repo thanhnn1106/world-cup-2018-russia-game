@@ -42,4 +42,9 @@ class HomeController extends BaseController
         return view('front.group');
     }
 
+    public function rules(Request $request)
+    {
+        return view('front.rules');
+    }
+
 }

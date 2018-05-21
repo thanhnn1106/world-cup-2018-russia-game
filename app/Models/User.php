@@ -45,7 +45,7 @@ class User extends Authenticatable
         return $result;
     }
 
-    public static function getUserRanking($limit = 10)
+    public static function getUserRanking()
     {
         $users = DB::table('users_matches AS um')
             ->select('um.user_id',
@@ -60,7 +60,6 @@ class User extends Authenticatable
             ->rightJoin('users AS u', 'u.id', '=', 'um.user_id')
             ->groupBy('u.name', 'u.email', 'u.luckystar', 'um.user_id')
             ->orderBy('total_point', 'DESC')
-            ->limit($limit)
             ->get();
 
         return $users;
