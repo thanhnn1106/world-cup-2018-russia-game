@@ -72,10 +72,8 @@
                             <li class="current"><a href="{{ route('front.user_ranking') }}">User Ranking</a></li>
                             <li class="current"><a href="{{ route('front.group') }}">Groups</a></li>
                             <li class="current"><a href="{{ route('front.team_table') }}">Teams Table</a></li>
-                            <li class="current"><a href="{{ route('front.rules') }}">Rules of game</a></li>
                             @if(!$isLogged)
                             <li>
-                                
                                 <form class="search" action="{{ route('auth.login') }}" method="POST">
                                     {{ csrf_field() }}
                                     <div class="input-group">
@@ -97,6 +95,7 @@
                                 </form>
                             </li>
                             @else
+                            <li class="current"><a href="{{ route('front.rules') }}">Rules of game</a></li>
                             <li class="current">
                                 <a href="">Hi, {{ $user->name }}</a>
                                 <ul class="sub-current">
@@ -134,7 +133,6 @@
                     <li>
                         <a href="{{ route('front.team_table') }}">Teams Table</a>
                     </li>
-                    <li><a href="{{ route('front.rules') }}">Rules of game</a></li>
                     @if(!$isLogged)
                     <li>
                         <form class="search" action="{{ route('auth.login') }}" method="POST">
@@ -158,6 +156,7 @@
                         </form>
                     </li>
                     @else
+                    <li><a href="{{ route('front.rules') }}">Rules of game</a></li>
                     <li class="current">
                         <a href="">Hi, {{ $user->name }}</a>
                         <ul class="sub-current">

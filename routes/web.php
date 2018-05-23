@@ -63,10 +63,6 @@ $router->group([
         'as' => 'result',
         'uses' => 'HomeController@result'
     ]);
-    $router->get('/rules', [
-        'as' => 'rules',
-        'uses' => 'HomeController@rules'
-    ]);
     // Require login
     $router->group([
         'middleware' => ['auth.front']
@@ -82,6 +78,10 @@ $router->group([
         $router->match(['get', 'post'], '/user/change-password/{userId?}', [
             'as'   => 'change_password',
             'uses' => 'UsersController@changePass',
+        ]);
+        $router->get('/rules', [
+            'as' => 'rules',
+            'uses' => 'HomeController@rules'
         ]);
     });
 });
