@@ -23,6 +23,7 @@
                 </div>
             </div>
         </div>
+        @if($isLogged)
         <hr>
         <div class="titles">
             <h4>Fee and prizes.</h4>
@@ -40,6 +41,7 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
     <!-- End Content Text-->
 </div>
