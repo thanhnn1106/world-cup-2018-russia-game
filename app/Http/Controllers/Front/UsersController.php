@@ -81,6 +81,12 @@ class UsersController extends BaseController
                ->where('user_id', $params['user_id'])
                ->where('match_id', $params['match_id'])
                ->update($params);
+            if ($params['is_lucky_star'] == 1) {
+                DB::table('users')->where('id', '=', $params['user_id'])
+                    ->update([
+                        'luckystar' => 0
+                ]);
+            }
 
             $request->session()->flash('success', trans('common.msg_update_success'));
             return redirect()->route('front.home');
