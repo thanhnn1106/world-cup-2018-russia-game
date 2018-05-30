@@ -44,8 +44,10 @@ class UsersController extends BaseController
                 'home_score'    => $request->get('home_score'),
                 'away_score'    => $request->get('away_score'),
                 'team_win'      => $request->get('match_result'),
-                'is_lucky_star' => $request->get('is_lucky_star') == 1 ? 1 : 0,
             ];
+            if ($request->get('is_lucky_star')) {
+                $params['is_lucky_star'] = $request->get('is_lucky_star') == 1 ? 1 : 0;
+            }
             $rules = $this->_setRules($params);
 
             // run the validation rules on the inputs from the form
@@ -81,7 +83,7 @@ class UsersController extends BaseController
                ->where('user_id', $params['user_id'])
                ->where('match_id', $params['match_id'])
                ->update($params);
-            if ($params['is_lucky_star'] == 1) {
+            if (isset($params['is_lucky_star']) && $params['is_lucky_star'] == 1) {
                 DB::table('users')->where('id', '=', $params['user_id'])
                     ->update([
                         'luckystar' => 0
