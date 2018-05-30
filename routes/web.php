@@ -75,6 +75,14 @@ $router->group([
             'as' => 'pre_history',
             'uses' => 'UsersController@predictionHistory'
         ]);
+        $router->get('/predict-champion', [
+            'as' => 'predict_champion',
+            'uses' => 'UsersController@predictChampion'
+        ]);
+        $router->post('/predict-champion', [
+            'as' => 'predict_champion',
+            'uses' => 'UsersController@predictChampion'
+        ]);
         $router->post('/predict', [
             'as' => 'predict',
             'uses' => 'UsersController@predict'

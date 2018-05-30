@@ -112,25 +112,25 @@ class MatchController extends Controller
                 $matchInfo->away_score == $updateResult->away_score)
             {
                 $isWinScore = 1;
-                $point = $point + 2;
+                $point = $point + 200;
             }
 
             if ($matchInfo->home_score > $matchInfo->away_score && $updateResult->team_win == 1)
             {
                 $isWinMatch = 1;
-                $point = $point + 1;
+                $point = $point + 100;
             }
 
             if ($matchInfo->home_score < $matchInfo->away_score && $updateResult->team_win == 2)
             {
                 $isWinMatch = 1;
-                $point = $point + 1;
+                $point = $point + 100;
             }
 
             if ($matchInfo->home_score == $matchInfo->away_score && $updateResult->team_win == 0)
             {
                 $isWinMatch = 1;
-                $point = $point + 1;
+                $point = $point + 100;
             }
 
             if ($updateResult->is_lucky_star == 1)

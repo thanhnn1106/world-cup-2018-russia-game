@@ -96,6 +96,7 @@
                                 </form>
                             </li>
                             @else
+                            <li class="current"><a href="{{ route('front.predict_champion') }}">Predict Champion</a></li>
                             <li class="current">
                                 <a href="">Hi, {{ $user->name }}</a>
                                 <ul class="sub-current">
@@ -157,6 +158,7 @@
                         </form>
                     </li>
                     @else
+                    <li class="current"><a href="{{ route('front.predict_champion') }}">Predict Champion</a></li>
                     <li class="current">
                         <a href="">Hi, {{ $user->name }}</a>
                         <ul class="sub-current">

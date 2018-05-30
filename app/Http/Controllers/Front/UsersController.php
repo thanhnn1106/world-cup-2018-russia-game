@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Front\BaseController;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Matches;
+use App\Models\Teams;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use Validator;
@@ -94,6 +94,48 @@ class UsersController extends BaseController
             return redirect()->route('front.home');
 
         }
+    }
+
+    public function predictChampion(Request $request)
+    {
+        $teamList = Teams::all();
+        $chkExistRecord = DB::table('user_champion')
+            ->where('user_id', Auth::user()->id)
+            ->first();
+        $data = [
+            'teamList' => $teamList,
+            'chkExistRecord' =>($chkExistRecord == NULL) ? '' : $chkExistRecord->team_id,
+            'totalUser' => count(DB::table('user_champion')->select('*')->get())
+        ];
+        if ($request->isMethod('POST')) {
+            $teamId = $request->get('teamId');
+            $checkTeam = Teams::find($teamId);
+            if ($checkTeam == NULL) {
+                $request->session()->flash('error', trans('Team is not exist.'));
+                return redirect()->route('front.predict_champion');
+            }
+
+            if ($chkExistRecord == NULL) {
+                DB::table('user_champion')->insert([
+                    'user_id' => Auth::user()->id,
+                    'team_id' => $teamId
+                ]);
+
+                $request->session()->flash('success', trans('Your predict was updated.'));
+                return redirect()->route('front.predict_champion');
+            }
+
+            DB::table('user_champion')
+               ->where('user_id', Auth::user()->id)
+               ->update([
+                   'team_id' => $teamId
+               ]);
+
+            $request->session()->flash('success', trans('Your predict was saved.'));
+            return redirect()->route('front.predict_champion');
+        }
+
+        return view('front.user_predict_champion.index', $data);
     }
 
     private function _setRules($request)
