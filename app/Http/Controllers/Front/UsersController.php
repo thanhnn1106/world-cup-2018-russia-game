@@ -67,7 +67,7 @@ class UsersController extends BaseController
             if ($chkExistRecord === NULL) {
                 $params['created_at'] = date('Y-m-d H:i:s');
                 DB::table('users_matches')->insert($params);
-                if ($params['is_lucky_star'] == 1) {
+                if (isset($params['is_lucky_star']) && $params['is_lucky_star'] == 1) {
                     DB::table('users')->where('id', '=', $params['user_id'])
                         ->update([
                             'luckystar' => 0
