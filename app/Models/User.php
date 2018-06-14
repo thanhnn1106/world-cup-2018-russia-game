@@ -92,6 +92,9 @@ class User extends Authenticatable
             if (isset($params['email'])) {
                 $query->where('u.email', 'LIKE', '%'.$params['email'].'%');
             }
+            if (isset($params['match_id'])) {
+                $query->where('m.id', '=', $params['match_id']);
+            }
             $query->orderBy('um.created_at', 'DESC');
         $usersHistory = $query->paginate(20);
 

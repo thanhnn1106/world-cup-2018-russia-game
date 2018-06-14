@@ -31,6 +31,18 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <select class="form-control" name="match_id" onchange="this.form.submit();">
+                                                <option value="">All</option>
+                                                @foreach ($matchList as $item)
+                                                <option @if ($matchId != '' && (int)$item->id === (int)$matchId) selected="selected" @endif value="{{ $item->id }}">{{ $item->home_team }} vs {{ $item->away_team }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             {{ csrf_field() }}
                         </form>

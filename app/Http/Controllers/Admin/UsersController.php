@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Matches;
 use Validator;
 use DB;
 
@@ -145,13 +146,16 @@ class UsersController extends Controller
     public function predictions(Request $request)
     {
         $params = [
-            'email' => $request->get('email')
+            'email' => $request->get('email'),
+            'match_id' => $request->get('match_id')
         ];
         $userHistoryList = User::getUserPreHistory($params);
+        $matchList = Matches::all();
         $data = [
             'userHistoryList' => $userHistoryList,
-            'email'           => $request->get('email')
-
+            'email'           => $request->get('email'),
+            'matchList'       => $matchList,
+            'matchId'         => $request->get('match_id'),
         ];
 
         return view('admin.users.predictions', $data);
